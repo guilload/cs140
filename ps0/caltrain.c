@@ -43,9 +43,8 @@ station_wait_for_train(struct station *station)
     lock_acquire(&station->lock);
     station->waiting += 1;
 
-    while (station->seats == 0) {
+    while (station->seats == 0)
         cond_wait(&station->open, &station->lock);
-    }
 
     station->boarding += 1;
     station->seats -= 1;
